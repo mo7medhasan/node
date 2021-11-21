@@ -8,7 +8,7 @@ const authRouter=require('./routes/auth.route')
 
 const productRouter=require('./routes/product.route')
 const app = express();
-const port =4000;
+app.set('port', (process.env.PORT || 5000));
 
 
 app.use(express.static(path.join(__dirname, 'assets')))
@@ -25,9 +25,6 @@ app.use('/product',productRouter)
 
 app.get('/', (req, res, next) => {
     res.render('index')
-})
-
-app.listen(port, (err) => {
-    // console.log(err)
-    console.log(`listen server on port ${port}  (:    :} `);
-})
+}).listen(app.get('port'), function() {
+    console.log('App is running, server is listening on port ', app.get('port'));
+});
